@@ -2,7 +2,7 @@
 // Replace this with your own email address
 include("../../config/basic.php");
 $to = EMAIL_TO_RECEIVE;
-// print_r($to);die;
+
 function url()
 {
     return sprintf(
@@ -24,8 +24,8 @@ $mail = $test->Conecta();
 // Charset para evitar erros de caracteres
 $mail->Charset = 'UTF-8';
 // Dados de quem está enviando o email
-$mail->From = 'jacometoseguros@gmail.com';
-$mail->FromName = 'JacometoContato';
+$mail->From = 'PsiuDev@gmail.com';
+$mail->FromName = 'PsiuDev';
 
 if ($_POST) {
     $name = trim(stripslashes($_POST['nome']));
@@ -42,11 +42,11 @@ if ($_POST) {
     $msg .= "Cnpj: " . $cnpj . "<br />";
     $msg .= "Quer receber um contato: " . $periodo . "<br />";
     $msg .= nl2br($contact_message);
-    $msg .= "<br /> ----- <br /> O email foi enviado de seu site " . url() . ". <br />";
+    $msg .= "<br /> ----- <br /> O email foi enviado de seu site " . url() . " com PsiuDev. <br />";
 
     // Setando o conteudo
     $mail->IsHTML(true);
-    $mail->Subject = "Jacometo - Alerta de Cadastro no site";
+    $mail->Subject = "PsiuDev - Alerta de Cadastro no site";
     $mail->Body = utf8_decode($msg);
 
     // Validando a autenticação
@@ -78,7 +78,6 @@ if ($_POST) {
     } else {
         // echo $mail->ErrorInfo;
         // die;
-        //criar um alerta para falhas de envio de email.
         echo 'Algo deu errado. Por favor tente novamente.';
     }
 }
