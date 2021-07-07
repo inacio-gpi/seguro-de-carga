@@ -1,0 +1,92 @@
+// Learn more:
+// @link https://dev.to/5t3ph/pure-css-typing-animation-1nld
+
+// "Type" width
+// - controls how much the word container expands when each letter is "typed"
+// - will need adjusted depending on word and typeface
+$chWidth: 0.49em;
+// Word length
+$chCount: 9;
+// Typing animation length
+$typeDuration: 180ms * $chCount;
+
+$color: slateblue;
+$bg: #f7f3ff;
+$cursor: scale-color($color, $lightness: -60%);
+
+h1 {
+  font-size: 4.5rem;
+  text-align: center;
+}
+
+.type-animation {
+  // Required for keeping expected alignment
+  display: inline-flex;
+  // Start out by hiding via width and overflow
+  width: 0;
+  overflow: hidden;
+  // Leave room for cursor!
+  padding-right: 0.08em;
+  position: relative;
+
+  &:after {
+    content: "";
+    background: $bg;
+    position: absolute;
+    right: 0;
+    top: -0.05em;
+    bottom: -0.05em;
+    width: 0.08em;
+    border-right: 2px solid transparent;
+  }
+
+  &.animating {
+    animation: type $typeDuration;
+    // "stick" to last frame
+    animation-fill-mode: forwards;
+    animation-delay: 1s;
+
+    &:after {
+      $cursorLoopCount: ((($chCount + 1) * 180)/320) + 3;
+      animation: cursor 320ms $cursorLoopCount ease-in-out;
+    }
+  }
+}
+
+@keyframes cursor {
+
+  0%,
+  100% {
+    border-color: $bg;
+  }
+
+  50% {
+    border-color: $cursor;
+  }
+
+  100% {
+    width: 0;
+  }
+}
+
+$frameSize: 100 / $chCount;
+
+button {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 0.75em;
+  background: transparent;
+  border-radius: 4px;
+  color: inherit;
+  border: 2px solid currentcolor;
+  min-height: 34px;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 18px;
+
+  &:hover,
+  &:focus {
+    background-color: scale-color($bg, $lightness: -5%);
+  }
+}

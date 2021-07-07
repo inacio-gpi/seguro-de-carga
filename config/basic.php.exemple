@@ -1,0 +1,45 @@
+<?php
+date_default_timezone_set('America/Sao_Paulo');
+
+ini_set('display_errors', '0');
+ini_set('max_execution_time', 120);
+ini_set("default_charset", 'utf-8');
+//ini_set('display_errors',1);
+//ini_set('display_startup_erros',1);
+//error_reporting(E_ALL);
+
+define('EMAIL_TO_RECEIVE', 'email_que_vai_receber_@gmail.com');
+
+// login e senha do email q vai enviar os emails.
+// a conta google precisa estar habilitada "Acesso a app menos seguro" e https://accounts.google.com/b/0/DisplayUnlockCaptcha 
+define('EMAIL_USERNAME', 'email_que_vai_enviar@gmail.com');
+define('EMAIL_PASSWORD', 'senha_do_email');
+if ($_SERVER['SERVER_NAME'] == 'localhost') {
+    // // se estiver dentro de uma pasta wordpress e quiser usar como um diretorio.
+    // // a pasta fica na raiz do wordpress
+    // // /wp-admin
+    // // /wp-content
+    // // /wp-includes
+    // // /seguro-de-carga <- nosso projeto
+
+    // define('UrlPadrao', "http://localhost/wordpress/seguro-de-carga/");
+    // define('UrlDesenvolvimento', 'wordpress');
+    // define('UrlDesenvolvimento2', 'seguro-de-carga');
+    // // UrlPadraoDocumento == /var/www/html/wordpress/seguro-de-carga
+    // define('UrlPadraoDocumento', $_SERVER['DOCUMENT_ROOT'] . '/' . UrlDesenvolvimento . '/' . UrlDesenvolvimento2);
+
+    // // se quiser usar como um site
+    // 
+    // define('UrlPadrao', "http://localhost/seguro-de-carga/");
+    // define('UrlDesenvolvimento', 'seguro-de-carga');
+    // // UrlPadraoDocumento == /var/www/html/wordpress/seguro-de-carga
+    // define('UrlPadraoDocumento', $_SERVER['DOCUMENT_ROOT'] . '/' . UrlDesenvolvimento);
+} else {
+    if ($_SERVER['REQUEST_SCHEME'] == 'http') {
+        // define('UrlPadrao', "http://www.wordpress.com/seguro-de-carga");
+    } else {
+        // define('UrlPadrao', "https://www.wordpress.com/seguro-de-carga");
+    }
+    define('UrlDesenvolvimento', 'seguro-de-carga');
+    define('UrlPadraoDocumento', $_SERVER['DOCUMENT_ROOT']);
+}
